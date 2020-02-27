@@ -27,7 +27,11 @@
 ## 初始化 默认参数
 
 ```
-> cgc d name
+> cgc d 不输入option参数 则默认重置name
+
+> cgc d -n name
+
+> cgc d -f $type$: [$name$] #$cardId$ $body$
 ```
 
 ## 使用

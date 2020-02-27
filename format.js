@@ -22,6 +22,12 @@ async function getDefaultName() {
   return name
 }
 
+async function getFormatAry() {
+  const { format } = await _.readFile(CONFIG_PATH)
+
+  return format.split(/\$(\S+)\$/g)
+}
+
 const promptList = [
   {
     type: 'list',
@@ -108,13 +114,32 @@ async function initPromptList() {
   promptList[1].default = defaultName
 }
 
+async function start() {
+  const formatAry = await getFormatAry()
+
+  let res = await inquirer.prompt(promptList)
+
+  for (let index in formatAry) {
+    let item = formatAry[index]
+
+    if (!res[item]) {
+      continue
+    }
+    formatAry.splice(index, 1, res[item])
+  }
+
+  return formatAry.join('')
+}
+
 async function format() {
   await initPromptList()
 
-  let { type, name, cardId, body } = await inquirer.prompt(promptList)
-  let formatAns = `${type}: [${name}] #${cardId} ${body}`
-  let res = await execGitCommitPromise(formatAns)
+  const formatString = await start()
+
+  let res = await execGitCommitPromise(formatString)
+
   console.log(res)
+
   process.exit(0)
 }
 
