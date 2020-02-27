@@ -1,10 +1,10 @@
 {
   "name": "cgc",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "bin": {
     "cgc": "index.js"
   },
-  "description": "",
+  "description": "Node cli about git commit msg 简易版 规范 可自定义格式",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
