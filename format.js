@@ -1,8 +1,9 @@
 const inquirer = require('inquirer')
 const child_process = require('child_process')
 const _ = require('./utils')
+const path = require('path')
 
-const CONFIG_PATH = './cgc.config.json'
+const CONFIG_PATH = `${path.resolve(__dirname, './cgc.config.json')}`
 
 function execGitCommitPromise(ans) {
   return new Promise((resolve, reject) => {
