@@ -29,6 +29,6 @@
 > 使用 cgc 命令 代替 git commit -m ""
 
 ```
-git add xxx
-cgc
+> git add xxx
+> cgc
 ```
