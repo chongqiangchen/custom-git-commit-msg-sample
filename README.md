@@ -41,4 +41,4 @@
 
 ## github
 
-[https://github.com/chongqiangchen/custom-git-commit-msg-sample](custom-git-commit-msg-sample)
+[custom-git-commit-msg-sample](https://github.com/chongqiangchen/custom-git-commit-msg-sample)
