@@ -24,6 +24,12 @@
  npm install -g cgc
 ```
 
+## 初始化 默认参数
+
+```
+> cgc d name
+```
+
 ## 使用
 
 > 使用 cgc 命令 代替 git commit -m ""
