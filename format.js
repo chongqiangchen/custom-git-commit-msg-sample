@@ -25,7 +25,7 @@ async function getDefaultName() {
 async function getFormatAry() {
   const { format } = await _.readFile(CONFIG_PATH)
 
-  return format.split(/\$(\S+)\$/g)
+  return format.split(/\&(\S+)\&/g)
 }
 
 const promptList = [

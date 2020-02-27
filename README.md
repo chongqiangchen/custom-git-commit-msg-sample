@@ -1,4 +1,4 @@
-# 简易版 规范 git commit msg cli
+# Node 简易版 规范 git commit msg cli
 
 ## 格式
 
@@ -31,7 +31,11 @@
 
 > cgc d -n name
 
-> cgc d -f $type$: [$name$] #$cardId$ $body$
+> cgc d -f "&type&: [&name&] #&cardId& &body&"
+// or: cgc d -f "[&name&] &type&: #&cardId& &body&"
+// or: cgc d -f "&type&: &name& - #&cardId& &body&"
+// or: cgc d -f "&type&: &body&"
+// or: ...
 ```
 
 ## 使用
