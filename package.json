@@ -1,18 +1,29 @@
 {
   "name": "cgc",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "bin": {
     "cgc": "index.js"
   },
   "description": "Node cli about git commit msg 简易版 规范 可自定义格式",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "log": "standard-changelog -f && git add CHANGELOG.md"
   },
   "author": "",
   "license": "ISC",
+  "keywords": [
+    "node-cli",
+    "git",
+    "commit",
+    "custom",
+    "msg"
+  ],
   "dependencies": {
     "commander": "^4.1.1",
     "inquirer": "^7.0.4"
+  },
+  "devDependencies": {
+    "standard-changelog": "^2.0.21"
   }
 }
