@@ -5,32 +5,8 @@ const path = require('path')
 
 const CONFIG_PATH = `${path.resolve(__dirname, './cgc.config.json')}`
 
-function execGitCommitPromise(ans) {
-  return new Promise((resolve, reject) => {
-    let cp = child_process.exec(`git commit -m "${ans}" `, function(
-      err,
-      stdout
-    ) {
-      if (err) reject(err)
-      resolve(stdout)
-      cp.kill()
-    })
-  })
-}
-
-async function getDefaultName() {
-  const { name } = await _.readFile(CONFIG_PATH)
-  return name
-}
-
-async function getFormatAry() {
-  const { format } = await _.readFile(CONFIG_PATH)
-
-  return format.split(/\&(\S+)\&/g)
-}
-
-const promptList = [
-  {
+const PROMPT_LIST_KEY_MAP = {
+  type: {
     type: 'list',
     message: 'type:',
     name: 'type',
@@ -90,54 +66,98 @@ const promptList = [
       }
     ]
   },
-  {
+  name: {
     type: 'input',
     message: 'name:',
     name: 'name',
     default: '' // 默认值
   },
-  {
+  cardId: {
     type: 'input',
     message: 'card ID:',
     name: 'cardId',
     default: 'N/A' // 默认值
   },
-  {
+  scope: {
+    type: 'input',
+    message: 'scope:',
+    name: 'scope',
+    default: '' // 默认值
+  },
+  body: {
     type: 'input',
     message: 'body:',
     name: 'body',
     default: '' // 默认值
   }
-]
-
-async function initPromptList() {
-  const defaultName = await getDefaultName()
-  promptList[1].default = defaultName
 }
 
-async function start() {
-  const formatAry = await getFormatAry()
+async function getDefaultName() {
+  const { name } = await _.readFile(CONFIG_PATH)
+  return name
+}
 
-  let res = await inquirer.prompt(promptList)
+async function getCustomFormatAry() {
+  const { format } = await _.readFile(CONFIG_PATH)
 
-  for (let index in formatAry) {
-    let item = formatAry[index]
+  return format.split(/\&(\S+)\&/g)
+}
 
-    if (!res[item]) {
+async function setDefaultValue() {
+  const defaultName = await getDefaultName()
+  PROMPT_LIST_KEY_MAP.name.default = defaultName
+}
+
+async function initPromptList() {
+  await setDefaultValue()
+  const customFormatAry = await getCustomFormatAry()
+
+  const tempList = Object.keys(PROMPT_LIST_KEY_MAP)
+    .map(key => {
+      if (customFormatAry.includes(key)) {
+        return PROMPT_LIST_KEY_MAP[key]
+      }
+    })
+    .filter(item => !!item)
+  return tempList
+}
+
+async function assembleInput(input) {
+  const customFormatAry = await getCustomFormatAry()
+
+  for (let index in customFormatAry) {
+    let item = customFormatAry[index]
+
+    if (!input[item]) {
       continue
     }
-    formatAry.splice(index, 1, res[item])
+    customFormatAry.splice(index, 1, input[item])
   }
 
-  return formatAry.join('')
+  return customFormatAry.join('')
+}
+
+function execGitCommit(ans) {
+  return new Promise((resolve, reject) => {
+    let cp = child_process.exec(`git commit -m "${ans}" `, function(
+      err,
+      stdout
+    ) {
+      if (err) reject(err)
+      resolve(stdout)
+      cp.kill()
+    })
+  })
 }
 
 async function format() {
-  await initPromptList()
+  const promptList = await initPromptList()
 
-  const formatString = await start()
+  const input = await inquirer.prompt(promptList)
 
-  let res = await execGitCommitPromise(formatString)
+  const assembleResult = await assembleInput(input)
+
+  let res = await execGitCommit(assembleResult)
 
   console.log(res)
 
