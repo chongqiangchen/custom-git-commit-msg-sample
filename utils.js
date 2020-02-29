@@ -7,7 +7,7 @@ function readFile(path) {
         // 在这里就可以通过判断 error 来确认是否有错误发生
         reject(error)
       } else {
-        resolve(JSON.parse(data.toString()))
+        resolve(data && JSON.parse(data.toString()))
       }
     })
   })

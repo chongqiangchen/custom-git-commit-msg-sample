@@ -12,6 +12,7 @@ async function getConfigInfo() {
 // commander
 function commander() {
   program
+    .version('1.2.6', '-v, --version')
     .command('default')
     .option('-n', '设置名字')
     .option('-f', '设置格式')
@@ -32,6 +33,7 @@ function commander() {
 
       process.exit()
     })
+
   program.parse(process.argv)
 }
 
