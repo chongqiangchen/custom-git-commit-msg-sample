@@ -10,7 +10,7 @@ async function getConfigInfo() {
 }
 
 // commander
-async function commander() {
+function commander() {
   program
     .command('default')
     .option('-n', '设置名字')
@@ -26,7 +26,7 @@ async function commander() {
         CONFIG_PATH,
         JSON.stringify({
           ...oldConfig,
-          [key]: cmd[0]
+          [key]: !!cmd ? cmd[0] : ''
         })
       )
 
