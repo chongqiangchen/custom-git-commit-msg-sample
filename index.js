@@ -7,8 +7,8 @@ process.on('SIGINT', function() {
   process.exit()
 })
 
-function main() {
-  commander()
+async function main() {
+  await commander()
 
   format()
 }

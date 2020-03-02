@@ -11,30 +11,45 @@ async function getConfigInfo() {
 
 // commander
 function commander() {
-  program
-    .version('1.2.7', '-v, --version')
-    .command('default')
-    .option('-n', '设置名字')
-    .option('-f', '设置格式')
-    .alias('d')
-    .description('设置默认值')
-    .action(async function(option, cmd) {
-      const oldConfig = await getConfigInfo()
+  return new Promise(resolve => {
+    program
+      .version('1.2.8', '-v, --version')
+      .command('default')
+      .option('-n', '设置名字')
+      .option('-f', '设置格式')
+      .alias('d')
+      .description('设置默认值')
+      .action(async function(option, cmd) {
+        const oldConfig = await getConfigInfo()
 
-      const key = option.F ? 'format' : 'name'
+        //初始化操作
+        if (!option.F && !option.N) {
+          await _.writeFile(
+            CONFIG_PATH,
+            JSON.stringify({
+              format: '&type&: [&name&] #&cardId& &body&',
+              name: ''
+            })
+          )
 
-      await _.writeFile(
-        CONFIG_PATH,
-        JSON.stringify({
-          ...oldConfig,
-          [key]: !!cmd ? cmd[0] : ''
-        })
-      )
+          resolve(process.exit(0))
+        }
 
-      process.exit()
-    })
+        const key = option.F ? 'format' : 'name'
 
-  program.parse(process.argv)
+        await _.writeFile(
+          CONFIG_PATH,
+          JSON.stringify({
+            ...oldConfig,
+            [key]: !!cmd ? cmd[0] : ''
+          })
+        )
+
+        resolve(process.exit(0))
+      })
+
+    program.parse(process.argv)
+  })
 }
 
 module.exports = commander

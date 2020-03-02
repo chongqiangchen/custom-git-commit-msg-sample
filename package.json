@@ -1,6 +1,6 @@
 {
   "name": "cgc",
-  "version": "1.2.7",
+  "version": "1.2.8",
   "bin": {
     "cgc": "index.js"
   },
@@ -8,7 +8,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "log": "standard-changelog -f && git add CHANGELOG.md"
+    "log": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md"
   },
   "author": "",
   "license": "ISC",
@@ -24,6 +24,7 @@
     "inquirer": "^7.0.4"
   },
   "devDependencies": {
+    "conventional-changelog-cli": "^2.0.31",
     "standard-changelog": "^2.0.21"
   }
 }
