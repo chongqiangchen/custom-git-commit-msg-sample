@@ -27,18 +27,22 @@
 ## 初始化 默认参数
 
 ```
-> cgc d 不输入option参数 则默认重置name
+> cgc d 不输入option参数 则代表查看当前配置情况
 
 // 设置默认名字
 > cgc d -n name
 
 // 设置默认格式
-// 支持type, scope, name, cardId, body任意组装出需要的格式
 > cgc d -f "&type&: [&name&] #&cardId& &body&"
-// or: cgc d -f "[&name&] &type&: #&cardId& &body&"
+
+// 支持type, scope, name, cardId, body任意组装出需要的格式
+// 默认为：feat: [chong] #N/A add new feature
 // or: cgc d -f "&type&: &name& - #&cardId& &body&"
-// or: cgc d -f "&type&(&scope&): &body&"
+// or: cgc d -f "&type&(&scope&): &body&(&cardId&)"
 // or: ...
+
+// 重置回默认设置
+> cgc d -r
 ```
 
 ## 使用
@@ -48,6 +52,29 @@
 ```
 > git add xxx
 > cgc
+```
+
+## 问题
+
+1. 设置默认名字时报如下错误：
+
+```
+undefined:1
+
+
+
+SyntaxError: Unexpected end of JSON input
+    at JSON.parse (<anonymous>)
+    at /Users/chongqiang.chen/Desktop/Project/Learn/cgc/utils.js:11:30
+    at FSReqCallback.readFileAfterClose [as oncomplete] (internal/fs/read_file_context.js:63:3)
+```
+
+建议忽略，此 BUG 正在修复中，不影响任何操作，设置默认名字已经成功
+
+2. 如何查看版本
+
+```
+  cgc -version or -v
 ```
 
 ## github
