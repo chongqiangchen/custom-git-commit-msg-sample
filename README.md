@@ -1,5 +1,7 @@
 # Node cli about git commit msg 简易版 规范 可自定义格式
 
+## 建议安装最新版 1.2.8
+
 ## 默认格式(可自定义格式)
 
 - template: `type: [name] #cardNo content` (if no cardNo, then it can be #N/A)
