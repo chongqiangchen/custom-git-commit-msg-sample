@@ -46,7 +46,7 @@ async function getConfigInfo() {
 function commander() {
   return new Promise(resolve => {
     program
-      .version('1.2.8', '-v, --version')
+      .version('1.2.9', '-v, --version')
       .command('default')
       .option('-n', '设置名字')
       .option('-f', '设置格式')
@@ -65,11 +65,14 @@ function commander() {
         } else {
           await OPTIONS_OPERATIONS[selectKey](oldConfig, cmd)
         }
-
         resolve(process.exit(0))
       })
 
     program.parse(process.argv)
+
+    setTimeout(() => {
+      resolve()
+    }, 100)
   })
 }
 
