@@ -13,6 +13,7 @@ const OPTIONS_OPERATIONS = {
         name: ''
       })
     )
+    console.log('reset successful!')
   },
   N: async (oldConfig, cmd) => {
     await _.writeFile(
@@ -22,6 +23,7 @@ const OPTIONS_OPERATIONS = {
         name: !!cmd ? cmd[0] : ''
       })
     )
+    console.log('set successful!')
   },
   F: async (oldConfig, cmd) => {
     await _.writeFile(
@@ -31,6 +33,7 @@ const OPTIONS_OPERATIONS = {
         format: !!cmd ? cmd[0] : ''
       })
     )
+    console.log('set successful!')
   }
 }
 
@@ -60,8 +63,7 @@ function commander() {
         if (!selectKey) {
           console.log('current config: ' + JSON.stringify(oldConfig))
         } else {
-          OPTIONS_OPERATIONS[selectKey](option, cmd)
-          console.log('set successful!')
+          await OPTIONS_OPERATIONS[selectKey](oldConfig, cmd)
         }
 
         resolve(process.exit(0))
