@@ -79,6 +79,23 @@ SyntaxError: Unexpected end of JSON input
   cgc -version or -v
 ```
 
+3. 如何在本地项目中使用
+
+```
+  npm install -D cgc
+
+  // update package.json
+  "script" : {
+    ...
+    "cgc": "cgc"
+    "cgc_d_n": "cgc d -n"
+    ...
+  }
+
+  // run
+  npm run cgc
+```
+
 ## github
 
 [custom-git-commit-msg-sample](https://github.com/chongqiangchen/custom-git-commit-msg-sample)
