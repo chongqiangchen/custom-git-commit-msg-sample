@@ -41,7 +41,7 @@ const PROMPT_LIST_KEY_MAP = {
       {
         key: 'fix',
         name: '- _fix_: fix the bug',
-        value: 'test'
+        value: 'fix'
       },
       {
         key: 'docs',

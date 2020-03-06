@@ -1,6 +1,6 @@
-# Node cli about git commit msg 简易版 规范 可自定义格式
+# git commit 规范化 格式 可自定义
 
-## 建议安装 1.2.9 以上版本
+> 建议安装 1.2.9 以上版本
 
 ## 默认格式(可自定义格式)
 
@@ -58,7 +58,7 @@
 
 ## 问题
 
-1. 设置默认名字时报如下错误：
+- 设置默认名字时报如下错误：
 
 ```
 undefined:1
@@ -73,13 +73,13 @@ SyntaxError: Unexpected end of JSON input
 
 建议忽略，此 BUG 正在修复中，不影响任何操作，设置默认名字已经成功
 
-2. 如何查看版本
+- 如何查看版本
 
 ```
   cgc -version or -v
 ```
 
-3. 如何在本地项目中使用
+- 如何在本地项目中使用
 
 ```
   npm install -D cgc

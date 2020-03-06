@@ -46,7 +46,7 @@ async function getConfigInfo() {
 function commander() {
   return new Promise(resolve => {
     program
-      .version('1.2.9', '-v, --version')
+      .version('1.3.1', '-v, --version')
       .command('default')
       .option('-n', '设置名字')
       .option('-f', '设置格式')
